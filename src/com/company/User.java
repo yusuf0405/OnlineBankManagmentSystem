@@ -25,7 +25,7 @@ public class User implements Serializable {
     }
 
     static void getAllUsers() {
-        for (User user : Main.users) {
+        for (User user : Main.bank.getCustomers()) {
             user.getInfo();
 
         }
@@ -37,7 +37,7 @@ public class User implements Serializable {
         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-ID: " + this.id + "-*-*-*-*-*-*-*-*-*-*-*-");
         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Данные о счете-*-*-*-*-*-*-*-*-*-*-*-");
         System.out.println("*************************************************************************************************");
-        for (Account a : Main.accounts) {
+        for (Account a : Main.bank.getAccounts()) {
             if (a.getAccountHolder().getId() == this.id) {
                 a.getInfo();
 

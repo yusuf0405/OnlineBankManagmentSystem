@@ -12,12 +12,27 @@ public class Bank implements Serializable {
     private ArrayList<Integer> ids = new ArrayList<>();
 
 
-
-    public Bank(List<User> customers, List<Account> accounts,ArrayList<Transaction> transactions,ArrayList<Integer> ids) {
+    public Bank(List<User> customers, List<Account> accounts, ArrayList<Transaction> transactions, ArrayList<Integer> ids) {
         this.customers = customers;
         this.accounts = accounts;
         this.ids = ids;
         this.transactions = transactions;
+    }
+
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(ArrayList<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
+    public ArrayList<Integer> getIds() {
+        return ids;
+    }
+
+    public void setIds(ArrayList<Integer> ids) {
+        this.ids = ids;
     }
 
     public String getBankName() {
