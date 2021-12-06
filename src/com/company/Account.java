@@ -17,8 +17,8 @@ public class Account implements Serializable {
         this.accountHolder = accountHolder;
     }
 
-    static void getAllAccount() {
-        for (Account a : Main.accounts) {
+    static void getAllAccount(ArrayList<Account> accountList) {
+        for (Account a : accountList) {
             a.getInfo();
 
         }
