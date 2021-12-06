@@ -7,12 +7,12 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Transaction implements Serializable {
-    private double amount;
-    private String timestamp;
-    private Account account;
-    private String typeTransaction;
+    private final double amount;
+    private final String timestamp;
+    private final Account account;
+    private final String typeTransaction;
     static Scanner scanner = new Scanner(System.in);
-    private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
 
     public Transaction(String typeTransaction, double amount, String timestamp, Account account) {
@@ -60,24 +60,22 @@ public class Transaction implements Serializable {
     }
 
     static void withdrawMoney() {
-        while (true) {
-            try {
-                Account.accaunts();
-                System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите id своего счета:-*-*-*-*-*-*-*-*-*-*-*-");
-                int id = scanner.nextInt();
-                for (Account account : Main.loggedUser.getAccountList()) {
-                    if (id == account.getId() && account.getName().equals("KGZ")) {
-                        withdrawMoneySettingKGZ(account);
-                    } else if (id == account.getId() && account.getName().equals("USD")) {
-                        withdrawMoneySettingUSD(account);
-                    }
+        while (true) try {
+            Account.accaunts();
+            System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите id своего счета:-*-*-*-*-*-*-*-*-*-*-*-");
+            int id = scanner.nextInt();
+            for (Account account : Main.loggedUser.getAccountList()) {
+                if (id == account.getId() && account.getName().equals("KGZ")) {
+                    withdrawMoneySettingKGZ(account);
+                } else if (id == account.getId() && account.getName().equals("USD")) {
+                    withdrawMoneySettingUSD(account);
                 }
-            } catch (Exception e) {
-                System.err.println("-*-*-*-*-*-*-*-*-*-*-*-Ошибка!!!-*-*-*-*-*-*-*-*-*-*-*-" +
-                        "\n-*-*-*-*-*-*-*-*-*-*-*-Неверный формат ввода!!-*-*-*-*-*-*-*-*-*-*-*-");
-                scanner.next();
-
             }
+        } catch (Exception e) {
+            System.err.println("-*-*-*-*-*-*-*-*-*-*-*-Ошибка!!!-*-*-*-*-*-*-*-*-*-*-*-" +
+                    "\n-*-*-*-*-*-*-*-*-*-*-*-Неверный формат ввода!!-*-*-*-*-*-*-*-*-*-*-*-");
+            scanner.next();
+
         }
 
 

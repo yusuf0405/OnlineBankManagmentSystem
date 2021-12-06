@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Account implements Serializable {
-    private int id;
+    private final int id;
     private double balance;
-    private String name;
-    private User accountHolder;
+    private final String name;
+    private final User accountHolder;
     static ArrayList<Transaction> transactions = new ArrayList<>();
 
     public Account(double balance, String name, User accountHolder) {
@@ -65,11 +65,6 @@ public class Account implements Serializable {
 
     public User getAccountHolder() {
         return accountHolder;
-    }
-
-
-    public static ArrayList<Transaction> getTransactions() {
-        return transactions;
     }
 
 

@@ -6,13 +6,13 @@ import java.util.Random;
 
 public class User implements Serializable {
 
-    private int id;
-    private String firstName;
-    private String lastName;
-    private ArrayList<Account> accountList = new ArrayList<>();
+    private final int id;
+    private final String firstName;
+    private final String lastName;
+    private final ArrayList<Account> accountList;
     static ArrayList<Integer> ids = new ArrayList<>();
-    private String login;
-    private String password;
+    private final String login;
+    private final String password;
 
     public User(String firstName, String lastName, String login, String password, ArrayList<Account> accounts) {
         this.id = genUniqueId();
@@ -46,10 +46,9 @@ public class User implements Serializable {
     }
 
     public static int genUniqueId() {
-        int id = 0;
+        int id;
         while (true) {
-            int random = new Random().nextInt(100000, 999999);
-            id = random;
+            id = new Random().nextInt(100000, 999999);
             if (checkForDuplicates(id)) {
                 ids.add(id);
                 break;

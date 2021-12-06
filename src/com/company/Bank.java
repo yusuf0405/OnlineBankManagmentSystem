@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Bank implements Serializable {
     private String bankName;
-    private List<User> customers;
-    private List<Account> accounts;
+    private final List<User> customers;
+    private final List<Account> accounts;
     private ArrayList<Transaction> transactions = new ArrayList<>();
 
     public Bank(String bankName, List<User> customers, List<Account> accounts, ArrayList<Transaction> transactions) {
