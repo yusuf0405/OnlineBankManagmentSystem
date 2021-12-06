@@ -1,24 +1,19 @@
 package com.company;
 
-import javax.xml.crypto.Data;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
     static double kursUsd = 86;
     static Bank bank;
-    private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
     static User loggedUser;
-
     static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
 
 
@@ -55,8 +50,6 @@ public class Main {
         users.add(ivan);
 
         bank = new Bank(users, accounts, transactions, User.ids);
-
-//        kgzJoseph.getInfo();
 
 
         readingFile();
@@ -141,7 +134,7 @@ public class Main {
                             n = true;
                             restart();
                         case 5:
-                            informationTransaction();
+                            Transaction.informationTransaction();
                             k = true;
                             n = true;
                             restart();
@@ -163,32 +156,6 @@ public class Main {
                 break;
             }
 
-        }
-
-
-    }
-
-    private static void informationTransaction() {
-        boolean mistake = false;
-        while (true) {
-            System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Информация об акаунтах пользователя-*-*-*-*-*-*-*-*-*-*-*-");
-            loggedUser.getAccountList().get(0).getInfo();
-            loggedUser.getAccountList().get(1).getInfo();
-            for (Transaction t : bank.getTransactions()) {
-                if (loggedUser.getFirstName().equals(t.getAccount().getAccountHolder().getFirstName())) {
-                    t.getInfo();
-                    mistake = true;
-
-                }
-
-            }
-            if (mistake) {
-                break;
-            }
-            if (!mistake) {
-                System.err.println("-*-*-*-*-*-*-*-*-*-*-*-У вас пока что нет транзакциий-*-*-*-*-*-*-*-*-*-*-*-");
-                break;
-            }
         }
 
 
@@ -237,7 +204,7 @@ public class Main {
 
     }
 
-    static void readingFile() {
+    private static void readingFile() {
         try {
             ObjectInputStream oos = new ObjectInputStream(new FileInputStream("Bank"));
             bank = (Bank) oos.readObject();

@@ -23,42 +23,25 @@ public class Bank implements Serializable {
         return transactions;
     }
 
-    public void setTransactions(ArrayList<Transaction> transactions) {
-        this.transactions = transactions;
-    }
 
-    public ArrayList<Integer> getIds() {
-        return ids;
-    }
 
-    public void setIds(ArrayList<Integer> ids) {
-        this.ids = ids;
-    }
 
-    public String getBankName() {
-        return bankName;
-    }
+
+
+
+
 
     public List<User> getCustomers() {
         return customers;
     }
 
-    public void setCustomers(List<User> customers) {
-        this.customers = customers;
-    }
+
 
     public List<Account> getAccounts() {
         return accounts;
     }
 
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
-    }
 
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
-
-    }
 
 
 }

@@ -35,10 +35,6 @@ public class Account implements Serializable {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public double getBalance() {
         return balance;
     }
@@ -51,23 +47,15 @@ public class Account implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public User getAccountHolder() {
         return accountHolder;
     }
 
-    public void setAccountHolder(User accountHolder) {
-        this.accountHolder = accountHolder;
-    }
 
     public static ArrayList<Transaction> getTransactions() {
         return transactions;
     }
 
-    public static void setTransactions(ArrayList<Transaction> transactions) {
-        Account.transactions = transactions;
-    }
+
 }

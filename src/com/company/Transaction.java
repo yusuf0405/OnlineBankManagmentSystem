@@ -1,7 +1,6 @@
 package com.company;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +12,6 @@ public class Transaction implements Serializable {
     private Account account;
     private String typeTransaction;
     static Scanner scanner = new Scanner(System.in);
-    static DecimalFormat f = new DecimalFormat("##.00");
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
 
@@ -28,18 +26,45 @@ public class Transaction implements Serializable {
     void getInfo() {
         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Пользватель: " + getAccount().getAccountHolder().getFirstName() + " " + getAccount().getAccountHolder().getLastName() + "-*-*-*-*-*-*-*-*-*-*-*-");
         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Тип операции: " + typeTransaction + "-*-*-*-*-*-*-*-*-*-*-*-");
-        System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Сумма транзакции: " + f.format(getAmount()) + "-*-*-*-*-*-*-*-*-*-*-*-");
-        System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Баланс после транзакции: " + f.format(getAccount().getBalance()) + "-*-*-*-*-*-*-*-*-*-*-*-");
+        System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Сумма транзакции: " + getAmount() + "-*-*-*-*-*-*-*-*-*-*-*-");
+        System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Баланс после транзакции: " + (getAccount().getBalance())+ "-*-*-*-*-*-*-*-*-*-*-*-");
         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Дата операции: " + getTimestamp() + "-*-*-*-*-*-*-*-*-*-*-*-");
         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Тип счета на котором была совершена операция: " + getAccount().getName() + "-*-*-*-*-*-*-*-*-*-*-*-");
         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Id счета: " + getAccount().getId() + "-*-*-*-*-*-*-*-*-*-*-*-");
         System.out.println("**********************************************************************************************************************************************");
     }
+     static void informationTransaction() {
+        boolean mistake = false;
+        while (true) {
+            System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Информация об акаунтах пользователя-*-*-*-*-*-*-*-*-*-*-*-");
+            System.out.println("********************************************************************************");
+            Main.loggedUser.getAccountList().get(0).getInfo();
+            Main.loggedUser.getAccountList().get(1).getInfo();
+            for (Transaction t : Main.bank.getTransactions()) {
+                if (Main.loggedUser.getFirstName().equals(t.getAccount().getAccountHolder().getFirstName())) {
+                    t.getInfo();
+                    mistake = true;
 
-    static void withdrawMoney() {
+                }
+
+            }
+            if (mistake) {
+                break;
+            }
+            if (!mistake) {
+                System.err.println("-*-*-*-*-*-*-*-*-*-*-*-У вас пока что нет транзакциий-*-*-*-*-*-*-*-*-*-*-*-");
+                break;
+            }
+        }
+
+
+    }
+
+     static void withdrawMoney() {
         while (true) {
             try {
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Информация об акаунтах пользователя-*-*-*-*-*-*-*-*-*-*-*-");
+                System.out.println("********************************************************************************");
                 Main.loggedUser.getAccountList().get(0).getInfo();
                 Main.loggedUser.getAccountList().get(1).getInfo();
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите id своего счета:-*-*-*-*-*-*-*-*-*-*-*-");
@@ -62,7 +87,7 @@ public class Transaction implements Serializable {
 
     }
 
-    static void withdrawMoneyKgz(Account account) {
+    private static void withdrawMoneyKgz(Account account) {
         while (true) {
             try {
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите сумму:-*-*-*-*-*-*-*-*-*-*-*-");
@@ -70,7 +95,7 @@ public class Transaction implements Serializable {
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Вы снимате деньги с USD на KGZ валюту-*-*-*-*-*-*-*-*-*-*-*-");
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Сумма будет уменшена согласно по курсу USD-*-*-*-*-*-*-*-*-*-*-*-");
                 summa = summa / Main.kursUsd;
-
+                summa = Math.round(summa);
                 if (summa > account.getBalance()) {
                     System.out.println("-*-*-*-*-*-*-*-*-*-*-*-У вас не достаточно денег на балансе чтобы снять денги в таком количестве-*-*-*-*-*-*-*-*-*-*-*-");
                     Main.restart();
@@ -96,7 +121,7 @@ public class Transaction implements Serializable {
 
     }
 
-    static void withdrawMoneyNO(Account account) {
+    private static void withdrawMoneyNO(Account account) {
         while (true) {
             try {
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите сумму:-*-*-*-*-*-*-*-*-*-*-*-");
@@ -125,7 +150,7 @@ public class Transaction implements Serializable {
 
     }
 
-    static void withdrawMoneyUsd(Account account) {
+    private  static void withdrawMoneyUsd(Account account) {
         while (true) {
             try {
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите сумму:-*-*-*-*-*-*-*-*-*-*-*-");
@@ -133,6 +158,7 @@ public class Transaction implements Serializable {
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Вы снимате деньги с KGZ на USD валюту-*-*-*-*-*-*-*-*-*-*-*-");
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Сумма будет умножена согласно по курсу USD-*-*-*-*-*-*-*-*-*-*-*-");
                 summa = summa * Main.kursUsd;
+                summa = Math.round(summa);
                 if (summa > account.getBalance()) {
                     System.out.println("-*-*-*-*-*-*-*-*-*-*-*-У вас не достаточно денег на балансе чтобы снять денги в таком количестве-*-*-*-*-*-*-*-*-*-*-*-");
                     Main.restart();
@@ -155,7 +181,7 @@ public class Transaction implements Serializable {
 
     }
 
-    static void withdrawMoneySettingUSD(Account account) {
+    private static void withdrawMoneySettingUSD(Account account) {
         while (true) {
             try {
                 account.getInfo();
@@ -183,7 +209,7 @@ public class Transaction implements Serializable {
 
     }
 
-    static void withdrawMoneySettingKGZ(Account account) {
+    private static void withdrawMoneySettingKGZ(Account account) {
 
         while (true) {
             try {
@@ -212,13 +238,14 @@ public class Transaction implements Serializable {
     }
 
 
-    static void transferOfFundsKgz(Account account) {
+    private static void transferOfFundsKgz(Account account) {
         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите сумму поплнение:-*-*-*-*-*-*-*-*-*-*-*-");
         double summa = scanner.nextDouble();
         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Вы пополняете USD счет с KGZ валюты-*-*-*-*-*-*-*-*-*-*-*-");
         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Сумма будет уменшена согласно по курсу USD-*-*-*-*-*-*-*-*-*-*-*-");
 
         summa = summa / Main.kursUsd;
+        summa = Math.round(summa);
         double f = account.getBalance() + summa;
         account.setBalance(f);
         Transaction transaction = new Transaction("Пополнение счета.", summa, sdf.format(new Date()), account);
@@ -228,12 +255,13 @@ public class Transaction implements Serializable {
 
     }
 
-    static void transferOfFundsUsd(Account account) {
+    private  static void transferOfFundsUsd(Account account) {
         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите сумму поплнение:-*-*-*-*-*-*-*-*-*-*-*-");
         double summa = scanner.nextDouble();
         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Вы пополняете KGZ счет с USD валюты-*-*-*-*-*-*-*-*-*-*-*-");
         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Сумма будет умножена согласно по курсу USD-*-*-*-*-*-*-*-*-*-*-*-");
         summa = summa * Main.kursUsd;
+        summa = Math.round(summa);
         double f = account.getBalance() + summa;
         account.setBalance(f);
         Transaction transaction = new Transaction("Пополнение счета.", summa, sdf.format(new Date()), account);
@@ -243,7 +271,7 @@ public class Transaction implements Serializable {
 
     }
 
-    static void transferOfFundsNO(Account account) {
+    private static void transferOfFundsNO(Account account) {
         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите сумму поплнение:-*-*-*-*-*-*-*-*-*-*-*-");
         double summa = scanner.nextDouble();
         double f = account.getBalance() + summa;
@@ -255,7 +283,7 @@ public class Transaction implements Serializable {
 
     }
 
-    static void transferOfFundsUSD(Account account) {
+    private static void transferOfFundsUSD(Account account) {
         while (true) {
             try {
                 account.getInfo();
@@ -281,7 +309,7 @@ public class Transaction implements Serializable {
 
     }
 
-    static void transferOfFundsKGZ(Account account) {
+    private static void transferOfFundsKGZ(Account account) {
         while (true) {
             try {
                 account.getInfo();
@@ -340,6 +368,7 @@ public class Transaction implements Serializable {
         while (true) {
             try {
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Информация об акаунтах пользователя-*-*-*-*-*-*-*-*-*-*-*-");
+                System.out.println("********************************************************************************");
                 Main.loggedUser.getAccountList().get(0).getInfo();
                 Main.loggedUser.getAccountList().get(1).getInfo();
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите id своего счета:-*-*-*-*-*-*-*-*-*-*-*-");
@@ -350,7 +379,7 @@ public class Transaction implements Serializable {
                         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите id счета на которую хотите перевести деньги:-*-*-*-*-*-*-*-*-*-*-*-");
                         int id = scanner.nextInt();
                         for (Account account : Main.bank.getAccounts()) {
-                            if (id == account.getId() && !Main.loggedUser.getFirstName().equals(account.getAccountHolder().getFirstName())) {
+                            if (id == account.getId() && id != a.getId()) {
                                 account.getInfo();
                                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите сумму для перевода:-*-*-*-*-*-*-*-*-*-*-*-");
                                 double summa = scanner.nextDouble();
@@ -362,6 +391,7 @@ public class Transaction implements Serializable {
                                         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Вы переводите с KGZ баланса на USD баланс-*-*-*-*-*-*-*-*-*-*-*-");
                                         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Сумма перевода будет увеличен согласно по курсу USD-*-*-*-*-*-*-*-*-*-*-*-");
                                         summa = summa * Main.kursUsd;
+                                        summa = Math.round(summa);
                                         if (summa > a.getBalance()) {
                                             System.err.println("-*-*-*-*-*-*-*-*-*-*-*-Не достаточно денег на счету чтобы сделать перевод-*-*-*-*-*-*-*-*-*-*-*-");
                                             Main.restart();
@@ -385,6 +415,7 @@ public class Transaction implements Serializable {
                                         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Вы переводите с USD баланса на KGZ баланс-*-*-*-*-*-*-*-*-*-*-*-");
                                         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Сумма перевода будет уменшен согласно по курсу USD-*-*-*-*-*-*-*-*-*-*-*-");
                                         summa = summa / Main.kursUsd;
+                                        summa = Math.round(summa);
                                         double f = a.getBalance() - summa;
                                         double popolnenie = account.getBalance() + summa;
                                         a.setBalance(f);
@@ -435,35 +466,22 @@ public class Transaction implements Serializable {
     }
 
 
-    public String getTypeTransaction() {
-        return typeTransaction;
-    }
 
-    public void setTypeTransaction(String typeTransaction) {
-        this.typeTransaction = typeTransaction;
-    }
 
     public double getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
+
 
     public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
-    }
+
 
     public Account getAccount() {
         return account;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 }

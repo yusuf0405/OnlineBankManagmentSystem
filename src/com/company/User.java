@@ -74,56 +74,27 @@ public class User implements Serializable {
         return accountList;
     }
 
-    public void setAccountList(ArrayList<Account> accountList) {
-        this.accountList = accountList;
-    }
-
-    public static ArrayList<Integer> getIds() {
-        return ids;
-    }
-
-    public static void setIds(ArrayList<Integer> ids) {
-        User.ids = ids;
-    }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lasttName) {
-        this.lastName = lasttName;
-    }
-
-
     public String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
