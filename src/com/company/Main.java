@@ -152,7 +152,7 @@ public class Main {
                         break;
                     }
                     if (!n) {
-                        System.out.println("dd");
+                        System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Ошибка следуйте инструкциям-*-*-*-*-*-*-*-*-*-*-*-");
                     }
                 }
             } catch (Exception e) {

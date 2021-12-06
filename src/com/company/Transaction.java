@@ -312,6 +312,7 @@ public class Transaction implements Serializable {
         while (true) {
             try {
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Информация об акаунтах пользователя-*-*-*-*-*-*-*-*-*-*-*-");
+                System.out.println("*************************************************************************************");
                 Main.loggedUser.getAccountList().get(0).getInfo();
                 Main.loggedUser.getAccountList().get(1).getInfo();
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите id своего счета:-*-*-*-*-*-*-*-*-*-*-*-");
