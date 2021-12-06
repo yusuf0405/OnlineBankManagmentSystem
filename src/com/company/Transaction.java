@@ -34,15 +34,13 @@ public class Transaction implements Serializable {
         System.out.println("**********************************************************************************************************************************************");
     }
 
-    static void informationTransaction() {
+    static void informationTransaction()
+    {
         boolean mistake = false;
         while (true) {
-            System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Информация об акаунтах пользователя-*-*-*-*-*-*-*-*-*-*-*-");
-            System.out.println("********************************************************************************");
-            Main.loggedUser.getAccountList().get(0).getInfo();
-            Main.loggedUser.getAccountList().get(1).getInfo();
+            Account.accaunts();
             for (Transaction t : Main.bank.getTransactions()) {
-                if (Main.loggedUser.getFirstName().equals(t.getAccount().getAccountHolder().getFirstName())) {
+                if (Main.loggedUser.getId() == t.getAccount().getAccountHolder().getId()) {
                     t.getInfo();
                     mistake = true;
 
@@ -64,10 +62,7 @@ public class Transaction implements Serializable {
     static void withdrawMoney() {
         while (true) {
             try {
-                System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Информация об акаунтах пользователя-*-*-*-*-*-*-*-*-*-*-*-");
-                System.out.println("********************************************************************************");
-                Main.loggedUser.getAccountList().get(0).getInfo();
-                Main.loggedUser.getAccountList().get(1).getInfo();
+                Account.accaunts();
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите id своего счета:-*-*-*-*-*-*-*-*-*-*-*-");
                 int id = scanner.nextInt();
                 for (Account account : Main.loggedUser.getAccountList()) {
@@ -340,10 +335,7 @@ public class Transaction implements Serializable {
     static void transferOfFunds() {
         while (true) {
             try {
-                System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Информация об акаунтах пользователя-*-*-*-*-*-*-*-*-*-*-*-");
-                System.out.println("*************************************************************************************");
-                Main.loggedUser.getAccountList().get(0).getInfo();
-                Main.loggedUser.getAccountList().get(1).getInfo();
+                Account.accaunts();
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите id своего счета:-*-*-*-*-*-*-*-*-*-*-*-");
                 int id = scanner.nextInt();
                 for (Account account : Main.loggedUser.getAccountList()) {
@@ -368,10 +360,7 @@ public class Transaction implements Serializable {
     static void topUpAccount() {
         while (true) {
             try {
-                System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Информация об акаунтах пользователя-*-*-*-*-*-*-*-*-*-*-*-");
-                System.out.println("********************************************************************************");
-                Main.loggedUser.getAccountList().get(0).getInfo();
-                Main.loggedUser.getAccountList().get(1).getInfo();
+               Account.accaunts();
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите id своего счета:-*-*-*-*-*-*-*-*-*-*-*-");
                 int i = scanner.nextInt();
                 for (Account a : Main.loggedUser.getAccountList()) {
@@ -402,7 +391,7 @@ public class Transaction implements Serializable {
                                         a.setBalance(minus);
                                         account.setBalance(popolnenie);
                                         Transaction transactionM = new Transaction("Перевод средств(Отпрвление).", summa, sdf.format(new Date()), a);
-                                        Transaction transactionP = new Transaction("Перевод средств(Приняте).", summa, sdf.format(new Date()), account);
+                                        Transaction transactionP = new Transaction("Перевод средств(Принято).", summa, sdf.format(new Date()), account);
                                         Main.bank.getTransactions().add(transactionM);
                                         Main.bank.getTransactions().add(transactionP);
                                         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Переведено деньги-*-*-*-*-*-*-*-*-*-*-*-");
@@ -422,7 +411,7 @@ public class Transaction implements Serializable {
                                         a.setBalance(f);
                                         account.setBalance(popolnenie);
                                         Transaction transactionM = new Transaction("Перевод средств(Отпрвление).", summa, sdf.format(new Date()), a);
-                                        Transaction transactionP = new Transaction("Перевод средств(Приняте).", summa, sdf.format(new Date()), account);
+                                        Transaction transactionP = new Transaction("Перевод средств(Принято).", summa, sdf.format(new Date()), account);
                                         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Переведено деньги-*-*-*-*-*-*-*-*-*-*-*-");
                                         transactionM.getInfo();
                                         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Принято деньги-*-*-*-*-*-*-*-*-*-*-*-");
@@ -436,7 +425,7 @@ public class Transaction implements Serializable {
                                         a.setBalance(f);
                                         account.setBalance(popolnenie);
                                         Transaction transactionM = new Transaction("Перевод средств(Отпрвление).", summa, sdf.format(new Date()), a);
-                                        Transaction transactionP = new Transaction("Перевод средств(Приняте).", summa, sdf.format(new Date()), account);
+                                        Transaction transactionP = new Transaction("Перевод средств(Принято).", summa, sdf.format(new Date()), account);
                                         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Переведено деньги-*-*-*-*-*-*-*-*-*-*-*-");
                                         transactionM.getInfo();
                                         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Принято деньги-*-*-*-*-*-*-*-*-*-*-*-");

@@ -9,14 +9,22 @@ public class Bank implements Serializable {
     private List<User> customers;
     private List<Account> accounts;
     private ArrayList<Transaction> transactions = new ArrayList<>();
-    private ArrayList<Integer> ids = new ArrayList<>();
 
-
-    public Bank(List<User> customers, List<Account> accounts, ArrayList<Transaction> transactions, ArrayList<Integer> ids) {
+    public Bank(String bankName, List<User> customers, List<Account> accounts, ArrayList<Transaction> transactions) {
         this.customers = customers;
         this.accounts = accounts;
-        this.ids = ids;
         this.transactions = transactions;
+
+    }
+
+    static void infoBank() {
+        System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Информация про банк имени Джозефа-*-*-*-*-*-*-*-*-*-*-*-");
+        System.out.println("*******************************************************************************");
+        System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Все клиенты банка и их аккаунты-*-*-*-*-*-*-*-*-*-*-*-");
+        System.out.println("*******************************************************************************");
+        User.getAllUsers();
+        System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Количество всех клиентов: " + Main.bank.customers.size() + "-*-*-*-*-*-*-*-*-*-*-*-");
+        System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Количество существующих аккаунтов: " + Main.bank.accounts.size() + "-*-*-*-*-*-*-*-*-*-*-*-");
     }
 
     public ArrayList<Transaction> getTransactions() {
@@ -24,24 +32,18 @@ public class Bank implements Serializable {
     }
 
 
-
-
-
-
-
-
+    public String getBankName() {
+        return bankName;
+    }
 
     public List<User> getCustomers() {
         return customers;
     }
 
 
-
     public List<Account> getAccounts() {
         return accounts;
     }
-
-
 
 
 }

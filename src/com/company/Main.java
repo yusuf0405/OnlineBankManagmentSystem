@@ -13,6 +13,7 @@ public class Main {
     static Bank bank;
     static User loggedUser;
     static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
 
 
@@ -27,6 +28,7 @@ public class Main {
         josephAccounts.add(usdJoseph);
         accounts.addAll(josephAccounts);
         users.add(joseph);
+
 
 
         ArrayList<Account> mikeAccounts = new ArrayList<>();
@@ -48,7 +50,26 @@ public class Main {
         accounts.addAll(ivanAccounts);
         users.add(ivan);
 
-        bank = new Bank(users, accounts, transactions, User.ids);
+        ArrayList<Account> madinaAccounts = new ArrayList<>();
+        User madina = new User("Мадина", "Абдувастова", "4", "4", madinaAccounts);
+        Account usdMadina = new Account(500, "USD", madina);
+        Account kgzMadina = new Account(200, "KGZ", madina);
+        madinaAccounts.add(usdMadina);
+        madinaAccounts.add(kgzMadina);
+        accounts.addAll(madinaAccounts);
+        users.add(madina);
+
+        ArrayList<Account> muhabbatAccounts = new ArrayList<>();
+        User muhabbat = new User("Мухаббат", "Акбарова", "5", "123", muhabbatAccounts);
+        Account usdMuhabbat = new Account(500000, "USD", muhabbat);
+        Account kgzMuhabbat = new Account(200000, "KGZ", muhabbat);
+        muhabbatAccounts.add(usdMuhabbat);
+        muhabbatAccounts.add(kgzMuhabbat);
+        accounts.addAll(muhabbatAccounts);
+        users.add(muhabbat);
+
+
+        bank = new Bank("Джозеф", users, accounts, transactions);
 
 
         readingFile();
@@ -109,7 +130,8 @@ public class Main {
                     System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Нажмите 3 чтобы снять деньги со счета-*-*-*-*-*-*-*-*-*-*-*-");
                     System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Нажмите 4 чтобы перевети средства на другой счет-*-*-*-*-*-*-*-*-*-*-*-");
                     System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Нажмите 5 чтобы узнать информацию о своих транзациях и аккаунтах-*-*-*-*-*-*-*-*-*-*-*-");
-                    System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Нажмите 6 чтобы выйти из системы и сохранить изминение-*-*-*-*-*-*-*-*-*-*-*-");
+                    System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Нажмите 6 чтобы узнать информацию о Банке-*-*-*-*-*-*-*-*-*-*-*-");
+                    System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Нажмите 7 чтобы выйти из системы и сохранить изминение-*-*-*-*-*-*-*-*-*-*-*-");
                     int num = scanner.nextInt();
                     switch (num) {
                         case 1:
@@ -138,6 +160,9 @@ public class Main {
                             n = true;
                             restart();
                         case 6:
+                            Bank.infoBank();
+                            restart();
+                        case 7:
                             savingData();
                     }
                     if (n) {
