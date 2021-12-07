@@ -17,13 +17,12 @@ public class Main {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-
-
         ArrayList<User> users = new ArrayList<>();
         ArrayList<Account> accounts = new ArrayList<>();
-
-
         ArrayList<Transaction> transactions = new ArrayList<>();
+
+
+
         ArrayList<Account> josephAccounts = new ArrayList<>();
         User joseph = new User("Юсуф", "Рузиев", "1", "1", josephAccounts);
         Account kgzJoseph = new Account(4000, "KGZ", joseph);
@@ -63,6 +62,8 @@ public class Main {
         users.add(madina);
 
         ArrayList<Account> muhabbatAccounts = new ArrayList<>();
+
+
         User muhabbat = new User("Мухаббат", "Акбарова", "5", "123", muhabbatAccounts);
         Account usdMuhabbat = new Account(500000, "USD", muhabbat);
         Account kgzMuhabbat = new Account(200000, "KGZ", muhabbat);
@@ -138,12 +139,10 @@ public class Main {
                     switch (num) {
                         case 1:
                             User.getAllUsers();
-
                             n = true;
                             restart();
                         case 2:
                             Transaction.transferOfFunds();
-
                             n = true;
                             restart();
                         case 3:
@@ -152,12 +151,10 @@ public class Main {
                             restart();
                         case 4:
                             Transaction.topUpAccount();
-
                             n = true;
                             restart();
                         case 5:
                             Transaction.informationTransaction();
-
                             n = true;
                             restart();
                         case 6:
