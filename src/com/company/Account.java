@@ -2,6 +2,7 @@ package com.company;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+@SuppressWarnings("ALL")
 
 public class Account implements Serializable {
     private final int id;

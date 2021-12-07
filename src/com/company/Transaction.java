@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+@SuppressWarnings("ALL")
 public class Transaction implements Serializable {
     private final double amount;
     private final String timestamp;
@@ -34,8 +35,7 @@ public class Transaction implements Serializable {
         System.out.println("**********************************************************************************************************************************************");
     }
 
-    static void informationTransaction()
-    {
+    static void informationTransaction() {
         boolean mistake = false;
         while (true) {
             Account.accaunts();
@@ -179,6 +179,8 @@ public class Transaction implements Serializable {
         while (true) {
             try {
                 account.getInfo();
+                System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Баланс: " + account.getBalance() + "-*-*-*-*-*-*-*-*-*-*-*-");
+                System.out.println("____________________________________________________________________________________");
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Нажмите 1 чтобы вывести деньги на USD-*-*-*-*-*-*-*-*-*-*-*-");
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Нажмите 2 чтобы вывести деньги на KGZ-*-*-*-*-*-*-*-*-*-*-*-");
                 int num = scanner.nextInt();
@@ -208,6 +210,9 @@ public class Transaction implements Serializable {
         while (true) {
             try {
                 account.getInfo();
+
+                System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Баланс: " + account.getBalance() + "-*-*-*-*-*-*-*-*-*-*-*-");
+                System.out.println("____________________________________________________________________________________");
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Нажмите 1 чтобы вывести деньги на USD-*-*-*-*-*-*-*-*-*-*-*-");
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Нажмите 2 чтобы вывести деньги на KGZ-*-*-*-*-*-*-*-*-*-*-*-");
                 int num = scanner.nextInt();
@@ -281,6 +286,8 @@ public class Transaction implements Serializable {
         while (true) {
             try {
                 account.getInfo();
+                System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Баланс: " + account.getBalance() + "-*-*-*-*-*-*-*-*-*-*-*-");
+                System.out.println("____________________________________________________________________________________");
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Нажмите 1 чтобы пополнить деньги на USD-*-*-*-*-*-*-*-*-*-*-*-");
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Нажмите 2 чтобы попольнить деньги на KGZ-*-*-*-*-*-*-*-*-*-*-*-");
                 int num = scanner.nextInt();
@@ -307,6 +314,8 @@ public class Transaction implements Serializable {
         while (true) {
             try {
                 account.getInfo();
+                System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Баланс: " + account.getBalance() + "-*-*-*-*-*-*-*-*-*-*-*-");
+                System.out.println("____________________________________________________________________________________");
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Нажмите 1 чтобы пополнить деньги на USD-*-*-*-*-*-*-*-*-*-*-*-");
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Нажмите 2 чтобы попольнить деньги на KGZ-*-*-*-*-*-*-*-*-*-*-*-");
                 int num = scanner.nextInt();
@@ -358,7 +367,7 @@ public class Transaction implements Serializable {
     static void topUpAccount() {
         while (true) {
             try {
-               Account.accaunts();
+                Account.accaunts();
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Введите id своего счета:-*-*-*-*-*-*-*-*-*-*-*-");
                 int i = scanner.nextInt();
                 for (Account a : Main.loggedUser.getAccountList()) {
@@ -377,8 +386,8 @@ public class Transaction implements Serializable {
                                 } else {
                                     if (a.getName().equals("KGZ") && account.getName().equals("USD")) {
                                         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Вы переводите с KGZ баланса на USD баланс-*-*-*-*-*-*-*-*-*-*-*-");
-                                        System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Сумма перевода будет увеличен согласно по курсу USD-*-*-*-*-*-*-*-*-*-*-*-");
-                                        summa = summa * Main.kursUsd;
+                                        System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Сумма перевода будет уменшен согласно по курсу USD-*-*-*-*-*-*-*-*-*-*-*-");
+                                        summa = summa / Main.kursUsd;
                                         summa = Math.round(summa);
                                         if (summa > a.getBalance()) {
                                             System.err.println("-*-*-*-*-*-*-*-*-*-*-*-Не достаточно денег на счету чтобы сделать перевод-*-*-*-*-*-*-*-*-*-*-*-");
@@ -401,8 +410,8 @@ public class Transaction implements Serializable {
                                         Main.restart();
                                     } else if (a.getName().equals("USD") && account.getName().equals("KGZ")) {
                                         System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Вы переводите с USD баланса на KGZ баланс-*-*-*-*-*-*-*-*-*-*-*-");
-                                        System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Сумма перевода будет уменшен согласно по курсу USD-*-*-*-*-*-*-*-*-*-*-*-");
-                                        summa = summa / Main.kursUsd;
+                                        System.out.println("-*-*-*-*-*-*-*-*-*-*-*-Сумма перевода будет увеличен согласно по курсу USD-*-*-*-*-*-*-*-*-*-*-*-");
+                                        summa = summa * Main.kursUsd;
                                         summa = Math.round(summa);
                                         double f = a.getBalance() - summa;
                                         double popolnenie = account.getBalance() + summa;

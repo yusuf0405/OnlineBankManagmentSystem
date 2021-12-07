@@ -8,6 +8,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+@SuppressWarnings("ALL")
+
 public class Main {
     static double kursUsd = 86;
     static Bank bank;
@@ -19,6 +21,8 @@ public class Main {
 
         ArrayList<User> users = new ArrayList<>();
         ArrayList<Account> accounts = new ArrayList<>();
+
+
         ArrayList<Transaction> transactions = new ArrayList<>();
         ArrayList<Account> josephAccounts = new ArrayList<>();
         User joseph = new User("Юсуф", "Рузиев", "1", "1", josephAccounts);
@@ -28,7 +32,6 @@ public class Main {
         josephAccounts.add(usdJoseph);
         accounts.addAll(josephAccounts);
         users.add(joseph);
-
 
 
         ArrayList<Account> mikeAccounts = new ArrayList<>();
@@ -120,7 +123,6 @@ public class Main {
 
 
     private static void MainMenu() {
-        boolean k = false;
         while (true) {
             try {
                 boolean n = false;
@@ -136,31 +138,31 @@ public class Main {
                     switch (num) {
                         case 1:
                             User.getAllUsers();
-                            k = true;
+
                             n = true;
                             restart();
                         case 2:
                             Transaction.transferOfFunds();
-                            k = true;
+
                             n = true;
                             restart();
                         case 3:
                             Transaction.withdrawMoney();
-                            k = true;
                             n = true;
                             restart();
                         case 4:
                             Transaction.topUpAccount();
-                            k = true;
+
                             n = true;
                             restart();
                         case 5:
                             Transaction.informationTransaction();
-                            k = true;
+
                             n = true;
                             restart();
                         case 6:
                             Bank.infoBank();
+                            n = true;
                             restart();
                         case 7:
                             savingData();
@@ -175,10 +177,9 @@ public class Main {
             } catch (Exception e) {
                 System.err.println("-*-*-*-*-*-*-*-*-*-*-*-Ошибка!!!-*-*-*-*-*-*-*-*-*-*-*-" +
                         "\n-*-*-*-*-*-*-*-*-*-*-*-Неверный формат ввода!!-*-*-*-*-*-*-*-*-*-*-*-");
+                scanner.next();
             }
-            if (k) {
-                break;
-            }
+
 
         }
 

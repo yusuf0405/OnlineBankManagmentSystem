@@ -3,6 +3,7 @@ package com.company;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+@SuppressWarnings("ALL")
 
 public class Bank implements Serializable {
     private String bankName;
